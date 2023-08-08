@@ -36,8 +36,6 @@ from modules.module_route import Route
 
 ## controllers
 from controllers import auth_controllers
-
-
 # 将controllers文件的函数注册到当前全局命名空间中
 globals()[auth_controllers.auth_controllers_get_token.__name__] = auth_controllers.auth_controllers_get_token
 

@@ -4,7 +4,7 @@ FROM python:3.9.17-alpine
 LABEL maintainer "yxh <xianhe_yan@sina.com>"
 #### 指定工作目录
 WORKDIR /usr/src/app
-COPY ./haikangapi.py /usr/src/app/
+COPY ../openapi/ /usr/src/app/
 COPY ./requirements.txt ./
 RUN apk update && \
     apk add --no-cache build-base libffi-dev openssl-dev && \
