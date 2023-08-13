@@ -32,20 +32,22 @@
 └── test                         # test 脚本目录
     ├── alert_message_ddl.sql
     └── test_hmac.py
+
 ~~~~~~
 
 
 _ main 文件主要是程序入口,将其他方法注册到主文件中.其他层托管其他地方处理.
-
 - 添加接口 需要在 main 文件中注册 *控制层中的具体方法*
 - 如：将controllers 目录下的auth_controllers文件中 auth_controllers_ping 方法注册到主方法中
 
 ~~~~~~
+
 ## controllers
 from controllers import auth_controllers
 # 将controllers文件的函数注册到当前全局命名空间中
 globals()[auth_controllers.auth_controllers_ping.__name__] = auth_controllers.auth_controllers_ping
-~~~~
+
+~~~~~~
 
 - 将 auth_controllers_ping 绑定到接口中 (interfaces) 
 
