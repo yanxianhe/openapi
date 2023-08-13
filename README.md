@@ -4,7 +4,7 @@
 
 ## 项目结构
 
-~~~~~~
+~~~
 .
 ├── controllers                  # 控制层 目录
 │   ├── auth_controllers.py      # 从HTTP请求中获取信息,提取参数
@@ -33,28 +33,27 @@
     ├── alert_message_ddl.sql
     └── test_hmac.py
 
-~~~~~~
+~~~
 
 
 _ main 文件主要是程序入口,将其他方法注册到主文件中.其他层托管其他地方处理.
 - 添加接口 需要在 main 文件中注册 *控制层中的具体方法*
 - 如：将controllers 目录下的auth_controllers文件中 auth_controllers_ping 方法注册到主方法中
 
-~~~~~~
 
+~~~
 ## controllers
 from controllers import auth_controllers
 # 将controllers文件的函数注册到当前全局命名空间中
 globals()[auth_controllers.auth_controllers_ping.__name__] = auth_controllers.auth_controllers_ping
-
-~~~~~~
+~~~
 
 - 将 auth_controllers_ping 绑定到接口中 (interfaces) 
 
-~~~~~~
+~~~
 INSERT INTO `interfaces` (transaction_id,name,path, method, controller,system_id,tags, description)
 VALUES ('ZR00001','探针','/api/ping', 'GET', 'auth_controllers_ping','ZR0001','ping','测试系统探针');
-~~~~~~
+~~~
 
 - 以上添加 服务探针接口, 请求方式是 GET 请求路径为 /api/ping.具体请求参数在 auth_controllers_ping 方法中处理.
 - 关于 controllers 层命名以文件名_具体方法名.禁止 controllers 中有重复的方法名及整改项目禁止方法名重复[原因工程使用方法名注入]
@@ -64,20 +63,20 @@ VALUES ('ZR00001','探针','/api/ping', 'GET', 'auth_controllers_ping','ZR0001',
 # 在工程目录的下的测试文件 ./test/test_hmac.py
   - 请注意,不需要包括 .py 扩展名,并且使用点号 . 替代目录路径中的斜杠 /
   - 进入项目目录 执行
-    ~~~~~~
+    ~~~
     # ./test/test_hmac.py
     python3 -m test.test_hmac
     # ./modules/module_route.py
     python3 -m modules.module_route
-    ~~~~~~
+    ~~~
 
 ## 关于日志
 
 ### 使用 logure 中的 logger
    - 系统环境变量定义 LOG_LEVEL 设置logs 日志级别 debug info success error 默认DEBUG
-   ~~~~~~
+   ~~~
    echo "LOG_LEVEL=info">> ~/.bashrc
-   ~~~~~~
+   ~~~
    - 日志存放位置在项目下的logs文件中
 
 
@@ -86,11 +85,11 @@ VALUES ('ZR00001','探针','/api/ping', 'GET', 'auth_controllers_ping','ZR0001',
 ### 关系数据库使用sqlalchemy orm 
    - 需要依赖pymysql
    - 需要创建 MySQLdb 别名以便与 SQLAlchemy 兼容 ORM
-   ~~~~~~ 
+   ~~~
    # 以便与 SQLAlchemy 兼容 ORM
    import pymysql
    pymysql.install_as_MySQLdb() 
-   ~~~~~~ 
+   ~~~
 ### 简单操作
 
 ~~~~~~
